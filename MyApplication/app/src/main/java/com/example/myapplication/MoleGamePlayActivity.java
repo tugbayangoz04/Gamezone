@@ -1,125 +1,129 @@
 package com.example.myapplication;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.Random;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MoleGamePlayActivity extends AppCompatActivity {
+        int score = 0;
+        TextView textView;
+        Button b1, b2, b3, b4, b5, b6, b7, b8, b9;
+        Handler handler = new Handler();
 
-    private TextView scoreText, timeText;
-    private ImageView[] moles;
-    private int score = 0;
-    private int activeMoleIndex = -1;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_mole_game_play);
 
-    private CountDownTimer gameTimer, moleTimer;
-    private final int GAME_DURATION = 60000;
-    private final int MOLE_INTERVAL = 800;
+            textView = findViewById(R.id.score);
+            textView = findViewById(R.id.Time);
+            b1 = findViewById(R.id.b1);
+            b2 = findViewById(R.id.b2);
+            b3 = findViewById(R.id.b3);
+            b4 = findViewById(R.id.b4);
+            b5 = findViewById(R.id.b5);
+            b6 = findViewById(R.id.b6);
+            b7 = findViewById(R.id.b7);
+            b8 = findViewById(R.id.b8);
+            b9 = findViewById(R.id.b9);
 
-    private MediaPlayer hitSound, popupSound;
-    private Random random;
+            textView.setText("Skorunuz : 0");
+            hideAllButtons();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mole_game_play);
+            new CountDownTimer(10000000, 2000) {
+                @Override
+                public void onFinish() {}
 
-        scoreText = findViewById(R.id.txtScore);
-        timeText = findViewById(R.id.txtTime);
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    int ran = (int)(Math.random() * 9) + 1;
 
-        moles = new ImageView[] {
-                findViewById(R.id.mole1), findViewById(R.id.mole2), findViewById(R.id.mole3),
-                findViewById(R.id.mole4), findViewById(R.id.mole5), findViewById(R.id.mole6),
-                findViewById(R.id.mole7), findViewById(R.id.mole8), findViewById(R.id.mole9)
-        };
+                    showOnlyButton(ran);
 
-        hitSound = MediaPlayer.create(this, R.raw.hit_sound);
-        popupSound = MediaPlayer.create(this, R.raw.popup_sound);
-        random = new Random();
-
-        setupMoleListeners();
-        startGame();
-    }
-
-    private void setupMoleListeners() {
-        for (int i = 0; i < moles.length; i++) {
-            int index = i;
-            moles[i].setVisibility(View.INVISIBLE);
-            moles[i].setTag(false); // false: görünmüyor
-
-            moles[i].setOnClickListener(v -> {
-                if ((boolean) moles[index].getTag()) {
-                    score++;
-                    scoreText.setText("Skor: " + score);
-                    moles[index].setVisibility(View.INVISIBLE);
-                    moles[index].setTag(false);
-                    hitSound.start();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            hideAllButtons();
+                        }
+                    }, 800);
                 }
-            });
-        }
-    }
-
-    private void startGame() {
-        score = 0;
-        scoreText.setText("Skor: 0");
-
-        gameTimer = new CountDownTimer(GAME_DURATION, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeText.setText("Süre: " + millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                timeText.setText("Süre: 0");
-                stopGame();
-            }
-        }.start();
-
-        moleTimer = new CountDownTimer(GAME_DURATION, MOLE_INTERVAL) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                showRandomMole();
-            }
-
-            @Override
-            public void onFinish() {}
-        }.start();
-    }
-
-    private void showRandomMole() {
-        // Önceki köstebeği gizle
-        if (activeMoleIndex != -1) {
-            moles[activeMoleIndex].setVisibility(View.INVISIBLE);
-            moles[activeMoleIndex].setTag(false);
+            }.start();
         }
 
-        // Yeni köstebeği seç ve göster
-        activeMoleIndex = random.nextInt(moles.length);
-        moles[activeMoleIndex].setVisibility(View.VISIBLE);
-        moles[activeMoleIndex].setTag(true);
-        popupSound.start();
-    }
+        private void hideAllButtons() {
+            b1.setVisibility(View.INVISIBLE);
+            b2.setVisibility(View.INVISIBLE);
+            b3.setVisibility(View.INVISIBLE);
+            b4.setVisibility(View.INVISIBLE);
+            b5.setVisibility(View.INVISIBLE);
+            b6.setVisibility(View.INVISIBLE);
+            b7.setVisibility(View.INVISIBLE);
+            b8.setVisibility(View.INVISIBLE);
+            b9.setVisibility(View.INVISIBLE);
+        }
 
-    private void stopGame() {
-        if (moleTimer != null) moleTimer.cancel();
-        if (gameTimer != null) gameTimer.cancel();
+        private void showOnlyButton(int index) {
+            hideAllButtons();
+            switch (index) {
+                case 1: b1.setVisibility(View.VISIBLE); break;
+                case 2: b2.setVisibility(View.VISIBLE); break;
+                case 3: b3.setVisibility(View.VISIBLE); break;
+                case 4: b4.setVisibility(View.VISIBLE); break;
+                case 5: b5.setVisibility(View.VISIBLE); break;
+                case 6: b6.setVisibility(View.VISIBLE); break;
+                case 7: b7.setVisibility(View.VISIBLE); break;
+                case 8: b8.setVisibility(View.VISIBLE); break;
+                case 9: b9.setVisibility(View.VISIBLE); break;
+            }
+        }
 
-        // Tüm köstebekleri gizle
-        for (ImageView mole : moles) {
-            mole.setVisibility(View.INVISIBLE);
-            mole.setTag(false);
+        public void b1(View view) {
+            if (b1.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b2(View view) {
+            if (b2.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b3(View view) {
+            if (b3.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b4(View view) {
+            if (b4.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b5(View view) {
+            if (b5.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b6(View view) {
+            if (b6.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b7(View view) {
+            if (b7.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b8(View view) {
+            if (b8.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        public void b9(View view) {
+            if (b9.getVisibility() == View.VISIBLE) updateScore();
+        }
+
+        private void updateScore() {
+            score++;
+            textView.setText("Skorunuz : " + score);
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (popupSound != null) popupSound.release();
-        if (hitSound != null) hitSound.release();
-    }
-}
