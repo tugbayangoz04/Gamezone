@@ -1,129 +1,126 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Random;
+
 public class MoleGamePlayActivity extends AppCompatActivity {
-        int score = 0;
-        TextView textView;
-        Button b1, b2, b3, b4, b5, b6, b7, b8, b9;
-        Handler handler = new Handler();
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_mole_game_play);
+    private DBHelper dbHelper;
+    TextView textView;
+    TextView textView2;
+    int score;
+    ImageView[] array;
+    Handler handler;
+    Runnable runnable;
 
-            textView = findViewById(R.id.score);
-            textView = findViewById(R.id.Time);
-            b1 = findViewById(R.id.b1);
-            b2 = findViewById(R.id.b2);
-            b3 = findViewById(R.id.b3);
-            b4 = findViewById(R.id.b4);
-            b5 = findViewById(R.id.b5);
-            b6 = findViewById(R.id.b6);
-            b7 = findViewById(R.id.b7);
-            b8 = findViewById(R.id.b8);
-            b9 = findViewById(R.id.b9);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mole_game_play);
 
-            textView.setText("Skorunuz : 0");
-            hideAllButtons();
+        dbHelper = new DBHelper(this);
 
-            new CountDownTimer(10000000, 2000) {
-                @Override
-                public void onFinish() {}
+        score = 0;
+        textView = findViewById(R.id.score);
+        textView2 = findViewById(R.id.Time);
 
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    int ran = (int)(Math.random() * 9) + 1;
+        array = new ImageView[]{
+                findViewById(R.id.imageView1),
+                findViewById(R.id.imageView2),
+                findViewById(R.id.imageView3),
+                findViewById(R.id.imageView4),
+                findViewById(R.id.imageView5),
+                findViewById(R.id.imageView6),
+                findViewById(R.id.imageView7),
+                findViewById(R.id.imageView8),
+                findViewById(R.id.imageView9)
+        };
 
-                    showOnlyButton(ran);
+        hideImages();
 
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            hideAllButtons();
-                        }
-                    }, 800);
-                }
-            }.start();
-        }
-
-        private void hideAllButtons() {
-            b1.setVisibility(View.INVISIBLE);
-            b2.setVisibility(View.INVISIBLE);
-            b3.setVisibility(View.INVISIBLE);
-            b4.setVisibility(View.INVISIBLE);
-            b5.setVisibility(View.INVISIBLE);
-            b6.setVisibility(View.INVISIBLE);
-            b7.setVisibility(View.INVISIBLE);
-            b8.setVisibility(View.INVISIBLE);
-            b9.setVisibility(View.INVISIBLE);
-        }
-
-        private void showOnlyButton(int index) {
-            hideAllButtons();
-            switch (index) {
-                case 1: b1.setVisibility(View.VISIBLE); break;
-                case 2: b2.setVisibility(View.VISIBLE); break;
-                case 3: b3.setVisibility(View.VISIBLE); break;
-                case 4: b4.setVisibility(View.VISIBLE); break;
-                case 5: b5.setVisibility(View.VISIBLE); break;
-                case 6: b6.setVisibility(View.VISIBLE); break;
-                case 7: b7.setVisibility(View.VISIBLE); break;
-                case 8: b8.setVisibility(View.VISIBLE); break;
-                case 9: b9.setVisibility(View.VISIBLE); break;
+        new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long l) {
+                textView2.setText("Time " + l / 1000);
             }
-        }
 
-        public void b1(View view) {
-            if (b1.getVisibility() == View.VISIBLE) updateScore();
-        }
+            @Override
+            public void onFinish() {
+                textView.setText("Time Off");
+                handler.removeCallbacks(runnable);
 
-        public void b2(View view) {
-            if (b2.getVisibility() == View.VISIBLE) updateScore();
-        }
+                for (ImageView image : array) {
+                    image.setVisibility(View.INVISIBLE);
+                }
 
-        public void b3(View view) {
-            if (b3.getVisibility() == View.VISIBLE) updateScore();
-        }
+                String userEmail = getIntent().getStringExtra("usermail");
 
-        public void b4(View view) {
-            if (b4.getVisibility() == View.VISIBLE) updateScore();
-        }
+                if (userEmail != null) {
+                    dbHelper.updateHighScore(userEmail, Constants.MOLE_GAME_NAME, score);
+                }
 
-        public void b5(View view) {
-            if (b5.getVisibility() == View.VISIBLE) updateScore();
-        }
+                int maxScore = dbHelper.getHighScore(userEmail, Constants.MOLE_GAME_NAME);
 
-        public void b6(View view) {
-            if (b6.getVisibility() == View.VISIBLE) updateScore();
-        }
+                AlertDialog.Builder alert = new AlertDialog.Builder(MoleGamePlayActivity.this);
+                alert.setTitle("Oyun Bitti");
 
-        public void b7(View view) {
-            if (b7.getVisibility() == View.VISIBLE) updateScore();
-        }
+                String message = "Max Score: " + maxScore +
+                        "\nCurrent Score: " + score +
+                        "\n\nBir daha oynamak ister misin?";
 
-        public void b8(View view) {
-            if (b8.getVisibility() == View.VISIBLE) updateScore();
-        }
+                alert.setMessage(message);
 
-        public void b9(View view) {
-            if (b9.getVisibility() == View.VISIBLE) updateScore();
-        }
+                alert.setPositiveButton("Evet", (dialogInterface, i) -> {
+                    Intent intent = getIntent();
+                    intent.putExtra("usermail", userEmail); // usermail tekrar ekleniyor
+                    finish();
+                    startActivity(intent);
+                });
 
-        private void updateScore() {
-            score++;
-            textView.setText("Skorunuz : " + score);
-        }
+                alert.setNegativeButton("Hayır", (dialogInterface, i) -> {
+                    Intent intent = new Intent(MoleGamePlayActivity.this, MainActivity.class);
+                    intent.putExtra("usermail",userEmail);
+                    startActivity(intent);
+                    finish();
+                });
+
+                alert.show();
+            }
+        }.start();
     }
+
+    public void hideImages() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                for (ImageView image : array) {
+                    image.setVisibility(View.INVISIBLE);
+                }
+
+                Random random = new Random();
+                int j = random.nextInt(array.length);
+                ImageView imageView = array[j];
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setOnClickListener(view -> {
+                    score++;
+                    textView.setText("Score: " + score);
+                    imageView.setVisibility(View.INVISIBLE);
+                });
+
+                handler.postDelayed(this, 800);
+            }
+        };
+        handler.post(runnable);
+    }
+}

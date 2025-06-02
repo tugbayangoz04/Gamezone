@@ -88,7 +88,7 @@
 
     <!-- Flappy Bird -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/flappyBirdCard"
+        android:id="@+id/bunnyCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -106,13 +106,13 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/flappy_bird"
-                android:contentDescription="Flappy Bird" />
+                android:src="@drawable/bunny"
+                android:contentDescription="Bunny Game" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flappy Bird"
+                android:text="Bunny Game"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_marginTop="8dp"

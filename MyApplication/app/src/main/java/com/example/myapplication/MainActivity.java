@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView;
 public class MainActivity extends AppCompatActivity {
 
     TextView welcomeText;
-    CardView memoryGameCard, moleGameCard, flappyBirdCard;
+    CardView memoryGameCard, moleGameCard, bunnyCard;
     Button btnLogout;
 
     @Override
@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
         welcomeText = findViewById(R.id.welcomeText);
         memoryGameCard = findViewById(R.id.memoryGameCard);
         moleGameCard = findViewById(R.id.moleGameCard);
-        flappyBirdCard = findViewById(R.id.flappyBirdCard);
+        bunnyCard = findViewById(R.id.bunnyCard);
         btnLogout = findViewById(R.id.btnLogout);
 
         // Kullanıcı adını al ve göster
-        String username = getIntent().getStringExtra("username");
-        if (username != null) {
-            welcomeText.setText("Welcome " + username + "!");
+        String usermail = getIntent().getStringExtra("usermail");
+        if (usermail != null) {
+            welcomeText.setText("Welcome " + usermail + "!");
         } else {
             welcomeText.setText("Welcome!");
         }
@@ -40,16 +40,19 @@ public class MainActivity extends AppCompatActivity {
         // CardView tıklamaları
         memoryGameCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MemoryCardActivity.class);
+            intent.putExtra("usermail",usermail);
             startActivity(intent);
         });
 
         moleGameCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MoleGameActivity.class);
+            intent.putExtra("usermail",usermail);
             startActivity(intent);
         });
 
-        flappyBirdCard.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FlappyBirdActivity.class);
+        bunnyCard.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SaveTheBunnyMainScreen.class);
+            intent.putExtra("usermail",usermail);
             startActivity(intent);
         });
 

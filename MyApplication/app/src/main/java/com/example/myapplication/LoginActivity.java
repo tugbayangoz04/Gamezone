@@ -42,11 +42,11 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            String username = dbHelper.loginUser(email, password);
+            String usermail = dbHelper.loginUser(email, password);
 
-            if (username != null) {
+            if (usermail != null) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("usermail", usermail);
                 startActivity(intent);
                 finish();
             } else {

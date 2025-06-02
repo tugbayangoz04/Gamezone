@@ -10,19 +10,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".MemoryCardOpenScreen"
+            android:exported="false" />
+        <activity
+            android:name=".SaveTheBunnyMainScreen"
+            android:exported="false" />
+        <activity
+            android:name=".SaveTheBunnyOpenScreen"
+            android:exported="false" />
+        <activity
+            android:name=".GameOver"
+            android:exported="false"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
+            android:name=".Memory_Card1"
+            android:exported="false" />
+        <activity
             android:name=".MoleGamePlayActivity"
             android:exported="false" />
         <activity
-            android:name=".MoleGamePlay"
+            android:name=".MoleGameActivity"
             android:exported="false" />
         <activity
-            android:name=".FlappyBirdActivity"
+            android:name=".SaveTheBunnyActivity"
             android:exported="false" />
         <activity
             android:name=".MemoryCardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MoleGameActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"

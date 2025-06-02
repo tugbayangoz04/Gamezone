@@ -51,6 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
                 boolean inserted = dbHelper.insertUser(username, email, password);
                 if (inserted) {
                     Toast.makeText(this, "Kayıt başarılı!", Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 } else {

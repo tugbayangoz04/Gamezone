@@ -19,6 +19,8 @@ public class MoleGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mole_game);
 
+        String usermail = getIntent().getStringExtra("usermail");
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Whack a Mole");
         }
@@ -26,16 +28,17 @@ public class MoleGameActivity extends AppCompatActivity {
         btnStartGame = findViewById(R.id.btnStartGame);
         btnBackToMenu = findViewById(R.id.btnBackToMenu);
 
-        // Oyuna Başla -> MoleGamePlayActivity
-        btnStartGame.setOnClickListener(v -> {
+
+
+        btnBackToMenu.setOnClickListener(v -> {
             Intent intent = new Intent(MoleGameActivity.this,MoleGamePlayActivity.class);
+            intent.putExtra("usermail",usermail);
             startActivity(intent);
         });
 
-        // Menüye Dön -> MainActivity
-        btnBackToMenu.setOnClickListener(v -> {
+        btnStartGame.setOnClickListener(v -> {
             Intent intent = new Intent(MoleGameActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Stack'i temizle
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         });

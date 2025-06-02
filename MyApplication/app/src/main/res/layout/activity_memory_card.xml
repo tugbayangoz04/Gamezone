@@ -1,10 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MemoryCardActivity">
+    android:fillViewport="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            app:alignmentMode="alignMargins"
+            app:columnCount="4"
+            app:rowCount="4"
+            app:useDefaultMargins="true">
+
+            <!-- 16 ImageView, sıralı row ve column ile -->
+            <ImageView
+                android:id="@+id/card0"
+                style="@style/CardImage"
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <ImageView
+                android:id="@+id/card1"
+                style="@style/CardImage"
+                app:layout_column="1"
+                app:layout_row="0" />
+
+            <ImageView
+                android:id="@+id/card2"
+                style="@style/CardImage"
+                app:layout_column="2"
+                app:layout_row="0" />
+
+            <ImageView
+                android:id="@+id/card3"
+                style="@style/CardImage"
+                app:layout_column="3"
+                app:layout_row="0" />
+
+            <ImageView
+                android:id="@+id/card4"
+                style="@style/CardImage"
+                app:layout_column="0"
+                app:layout_row="1" />
+
+            <ImageView
+                android:id="@+id/card5"
+                style="@style/CardImage"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <ImageView
+                android:id="@+id/card6"
+                style="@style/CardImage"
+                app:layout_column="2"
+                app:layout_row="1" />
+
+            <ImageView
+                android:id="@+id/card7"
+                style="@style/CardImage"
+                app:layout_column="3"
+                app:layout_row="1" />
+
+            <ImageView
+                android:id="@+id/card8"
+                style="@style/CardImage"
+                app:layout_column="0"
+                app:layout_row="2" />
+
+            <ImageView
+                android:id="@+id/card9"
+                style="@style/CardImage"
+                app:layout_column="1"
+                app:layout_row="2" />
+
+            <ImageView
+                android:id="@+id/card10"
+                style="@style/CardImage"
+                app:layout_column="2"
+                app:layout_row="2" />
+
+            <ImageView
+                android:id="@+id/card11"
+                style="@style/CardImage"
+                app:layout_column="3"
+                app:layout_row="2" />
+
+            <ImageView
+                android:id="@+id/card12"
+                style="@style/CardImage"
+                app:layout_column="0"
+                app:layout_row="3" />
+
+            <ImageView
+                android:id="@+id/card13"
+                style="@style/CardImage"
+                app:layout_column="1"
+                app:layout_row="3" />
+
+            <ImageView
+                android:id="@+id/card14"
+                style="@style/CardImage"
+                app:layout_column="2"
+                app:layout_row="3" />
+
+            <ImageView
+                android:id="@+id/card15"
+                style="@style/CardImage"
+                app:layout_column="3"
+                app:layout_row="3" />
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <TextView
+            android:id="@+id/txtScore"
+            android:layout_width="256dp"
+            android:layout_height="77dp"
+            android:gravity="center"
+            android:text="Score:0"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="256dp"
+            android:layout_height="77dp"
+            android:gravity="center"
+            android:text="Time: 10"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+</ScrollView>
