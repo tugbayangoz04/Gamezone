@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".FBGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FBGameOver"
+            android:exported="false" />
+        <activity
+            android:name=".FBMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MemoryCardOpenScreen"
             android:exported="false" />
         <activity
@@ -23,16 +32,10 @@
             android:exported="false"
             android:theme="@style/Theme.MyApplication" />
         <activity
-            android:name=".Memory_Card1"
-            android:exported="false" />
-        <activity
             android:name=".MoleGamePlayActivity"
             android:exported="false" />
         <activity
             android:name=".MoleGameActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SaveTheBunnyActivity"
             android:exported="false" />
         <activity
             android:name=".MemoryCardActivity"

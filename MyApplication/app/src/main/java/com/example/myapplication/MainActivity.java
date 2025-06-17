@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView;
 public class MainActivity extends AppCompatActivity {
 
     TextView welcomeText;
-    CardView memoryGameCard, moleGameCard, bunnyCard;
+    CardView memoryGameCard, moleGameCard, bunnyCard,flappyCard;
     Button btnLogout;
 
     @Override
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         moleGameCard = findViewById(R.id.moleGameCard);
         bunnyCard = findViewById(R.id.bunnyCard);
         btnLogout = findViewById(R.id.btnLogout);
+        flappyCard = findViewById(R.id.flappyGameCard);
 
         // Kullanıcı adını al ve göster
         String usermail = getIntent().getStringExtra("usermail");
@@ -52,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
         bunnyCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SaveTheBunnyMainScreen.class);
+            intent.putExtra("usermail",usermail);
+            startActivity(intent);
+        });
+
+        bunnyCard.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SaveTheBunnyMainScreen.class);
+            intent.putExtra("usermail",usermail);
+            startActivity(intent);
+        });
+
+        flappyCard.setOnClickListener(v-> {
+            Intent intent = new Intent(MainActivity.this, FBMainActivity.class);
             intent.putExtra("usermail",usermail);
             startActivity(intent);
         });

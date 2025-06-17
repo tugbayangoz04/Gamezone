@@ -6,4 +6,9 @@
         <color name="textDark">#2C2C2C</color>        <!-- Ana yazılar -->
         <color name="white">#FFFFFF</color>           <!-- Buton yazısı -->
         <color name="textMain">#2C2C2C</color>
+        <color name="colorGray">#808080</color>
+        <color name="colorRed">#FFCB0013</color>
+        <color name="colorYellow">#FF0</color>
+        <color name="colorWhite">#FFF</color>
+        <color name="myColor">#103050</color>
 </resources>
