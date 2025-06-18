@@ -36,5 +36,4 @@ public class FBMainActivity extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
-
 }

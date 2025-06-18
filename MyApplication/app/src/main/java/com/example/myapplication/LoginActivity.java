@@ -1,19 +1,17 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editEmail, editPassword;
     Button btnLogin;
-    TextView textMessage;
+    TextView textMessage, textSignupLink;
 
     DBHelper dbHelper;
 
@@ -29,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        textMessage = findViewById(R.id.textMessage);
+        textMessage = findViewById(R.id.textSignupLink);
+        textSignupLink = findViewById(R.id.textSignupLink);
 
         dbHelper = new DBHelper(this);
 
@@ -52,6 +51,11 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 textMessage.setText("Giriş başarısız. Bilgileri kontrol et.");
             }
+        });
+
+        textSignupLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
     }
 }

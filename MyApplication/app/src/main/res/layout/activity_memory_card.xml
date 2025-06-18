@@ -22,7 +22,7 @@
             app:rowCount="4"
             app:useDefaultMargins="true">
 
-            <!-- 16 ImageView, sıralı row ve column ile -->
+
             <ImageView
                 android:id="@+id/card0"
                 style="@style/CardImage"

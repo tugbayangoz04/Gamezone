@@ -22,6 +22,7 @@ public class FBAppHolder {
     static FBSoundPlayer soundPlay;
 
 
+
     public static void assign(Context context){
         mapScreenSize(context);
         bitmapControl = new FBBitmapControl(context.getResources());

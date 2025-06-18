@@ -2,9 +2,9 @@ package com.example.myapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.*;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -108,6 +108,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 ContentValues values = new ContentValues();
                 values.put(COL_SCORE, newScore);
                 db.update(TABLE_SCORES, values, COL_USER_EMAIL + "=? AND " + COL_GAME + "=?", new String[]{userEmail, gameName});
+                Log.d("DBHelper", "High score updated for " + userEmail + " in " + gameName);
             }
         } else {
             ContentValues values = new ContentValues();
@@ -115,6 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(COL_GAME, gameName);
             values.put(COL_SCORE, newScore);
             db.insert(TABLE_SCORES, null, values);
+            Log.d("DBHelper", "New high score inserted for " + userEmail + " in " + gameName);
         }
 
         cursor.close();

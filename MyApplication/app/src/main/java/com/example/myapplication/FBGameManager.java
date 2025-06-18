@@ -16,11 +16,10 @@ public class FBGameManager{
     static int gameState;
     ArrayList<FBTubeCollection>tubeCollections;
     Random rand;
-    int scoreCount; //this will be used to store the score
-    int winningTube; // this will uesd to determine the winning tube obsctacle
+    int scoreCount;
+    int winningTube;
     Paint designPaint;
 
-    // the constructor
     public FBGameManager() {
         bgImage = new FBBgImage();
         bird = new FBFlyingBird();
@@ -42,11 +41,6 @@ public class FBGameManager{
         designPaint.setShadowLayer(5.0f, 20.0f,20.0f, Color.BLACK);
     }
 
-   /*
-      gameState == 0 : not  runniing
-      gameState == 1 : the game is running
-      gameState == 2 : The game is over
-   */
 
       public void generateTubeObject(){
           for (int j = 0; j< FBAppHolder.tube_numbers; j++){
@@ -104,7 +98,6 @@ public class FBGameManager{
           }
       }
 
-      // Method responsible for the Flying Bird
       public void birdAnimation(Canvas canvas){
           if (gameState == 1){
               if (bird.getY() <(FBAppHolder.SCRN_HEIGHT_Y -FBAppHolder.getBitmapControl().getBirdHeight()) || bird.getVelocity()<0 ){
@@ -120,7 +113,7 @@ public class FBGameManager{
         }
         bird.setCurrentFrame(currentFrame);
     }
-      //Method responsible for the background side scrolling animation
+
       public void backgroundAnimation(Canvas canvas){
         bgImage.setX(bgImage.getX() - bgImage.getVelocity());
         if (bgImage.getX() < -FBAppHolder.getBitmapControl().getBackgroundWidth()){

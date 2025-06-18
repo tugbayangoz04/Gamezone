@@ -8,7 +8,7 @@ public class FBMainThread extends Thread{
     SurfaceHolder mySurfaceHolder;
     long timeSpent;
     long kickOffTime;
-    long WAIT = 31; // the time it takes for the frame to refresh in milliseconds
+    long WAIT = 31;
     boolean Running;
     private static Canvas canvas;
     public FBMainThread(SurfaceHolder surfaceHolder) {

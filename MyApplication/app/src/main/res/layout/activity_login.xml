@@ -1,55 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/lavenderLight"
+    android:background="@android:color/white"
     android:padding="24dp">
 
+
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/game_icon"
-        android:layout_marginBottom="24dp"
-        android:contentDescription="Logo" />
+        android:layout_width="156dp"
+        android:layout_height="163dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Logo"
+        android:src="@drawable/game_icon" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giriş Yap"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="24dp" />
+
 
     <EditText
         android:id="@+id/editEmail"
-        android:hint="Email"
+        android:hint="Email adresinizi giriniz"
         android:inputType="textEmailAddress"
-        android:backgroundTint="@color/pastelBlue"
-        android:textColor="@color/textDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
+
 
     <EditText
         android:id="@+id/editPassword"
-        android:hint="Password"
+        android:hint="Şifrenizi giriniz"
         android:inputType="textPassword"
-        android:backgroundTint="@color/pastelBlue"
-        android:textColor="@color/textDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
+
 
     <Button
         android:id="@+id/btnLogin"
-        android:text="Log In"
-        android:background="@drawable/rounded_button"
-        android:textColor="@color/white"
+        android:text="Giriş Yap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_button"
+        android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/textMessage"
-        android:text=""
-        android:textColor="@color/textDark"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:text="Hesabınız yok mu? "
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textSignupLink"
+            android:text="Kayıt OL"
+            android:textSize="14sp"
+            android:textColor="#1E90FF"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
 </LinearLayout>

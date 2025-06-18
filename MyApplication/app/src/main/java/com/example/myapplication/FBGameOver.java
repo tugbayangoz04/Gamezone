@@ -1,47 +1,56 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class FBGameOver extends AppCompatActivity {
 
-    Button mRestatrtButton;
-    TextView tScore,tBest;
+    private TextView scoreDisplay, BestDisplay;
+    private Button btnRestart, btnMore;
+    private DBHelper dbHelper;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fbgame_over_screen);
-        mRestatrtButton = findViewById(R.id.btnRestart);
-        int scoreCount = getIntent().getExtras().getInt("score");
-        SharedPreferences pref = getSharedPreferences("myStoragePreference",0);
-        int scoreBest = pref.getInt("scoreBest",0);
-        SharedPreferences.Editor edit = pref.edit();
-        if (scoreCount > scoreBest){
-            scoreBest = scoreCount;
-            edit.putInt("scoreBest",scoreBest);
-            edit.apply();
+
+        scoreDisplay = findViewById(R.id.scoreDisplay);
+        BestDisplay = findViewById(R.id.BestDisplay);
+        btnRestart = findViewById(R.id.btnRestart);
+        btnMore = findViewById(R.id.btnMore);
+
+        dbHelper = new DBHelper(this);
+
+        Intent intent = getIntent();
+        int score = intent.getIntExtra("score", 0);
+        userEmail = intent.getStringExtra("usermail");
+
+        scoreDisplay.setText("" + score);
+
+        if (userEmail != null) {
+            dbHelper.updateHighScore(userEmail, Constants.FLAPPY_GAME_NAME, score);
+            int maxScore = dbHelper.getHighScore(userEmail, Constants.FLAPPY_GAME_NAME);
+            BestDisplay.setText("" + maxScore);
+        } else {
+            BestDisplay.setText("-");
         }
-        tScore = findViewById(R.id.scoreDisplay);
-        tBest = findViewById(R.id.BestDisplay);
-        tScore.setText(""+scoreCount);
-        tBest.setText(""+scoreBest);
 
-
-        mRestatrtButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(FBGameOver.this,FBMainActivity.class);
-                startActivity(myIntent);
-            }
+        btnRestart.setOnClickListener(v -> {
+            Intent retryIntent = new Intent(FBGameOver.this, FBGameActivity.class);
+            retryIntent.putExtra("usermail", userEmail);
+            startActivity(retryIntent);
+            finish();
         });
 
-
+        btnMore.setOnClickListener(v -> {
+            Intent menuIntent = new Intent(FBGameOver.this, MainActivity.class);
+            menuIntent.putExtra("usermail", userEmail);
+            startActivity(menuIntent);
+            finish();
+        });
     }
 }

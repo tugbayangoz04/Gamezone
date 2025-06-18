@@ -19,7 +19,6 @@ public class SignUpActivity extends AppCompatActivity {
     EditText editUsername, editEmail, editPassword;
     Button btnSignUp;
     TextView textLoginLink;
-
     DBHelper dbHelper;
 
     @Override

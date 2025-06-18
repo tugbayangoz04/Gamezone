@@ -1,65 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/lavenderLight"
+    android:background="@android:color/white"
     android:padding="24dp">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/game_icon"
+        android:layout_width="159dp"
+        android:layout_height="149dp"
         android:layout_marginBottom="24dp"
-        android:contentDescription="Logo" />
+        android:contentDescription="Logo"
+        android:src="@drawable/game_icon" />
+
+    <TextView
+        android:text="Kayıt Ol"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editUsername"
-        android:hint="Username"
-        android:backgroundTint="@color/pastelBlue"
-        android:textColor="@color/textDark"
+        android:hint="Enter your username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/editEmail"
-        android:hint="Email"
+        android:hint="Enter your email"
         android:inputType="textEmailAddress"
-        android:backgroundTint="@color/pastelBlue"
-        android:textColor="@color/textDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/editPassword"
-        android:hint="Password"
+        android:hint="Enter your password"
         android:inputType="textPassword"
-        android:backgroundTint="@color/pastelBlue"
-        android:textColor="@color/textDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:text="Sign Up"
-        android:background="@drawable/rounded_button"
-        android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_button"
+        android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/textLoginLink"
-        android:text="Already have an account? Log in"
-        android:textColor="@color/lavenderDark"
-        android:textSize="14sp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/textacc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="You already have an account?"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:text=" Log in!"
+        android:id="@+id/textLoginLink"
+        android:textSize="14sp"
+        android:textColor="#1E90FF"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"/>
 </LinearLayout>

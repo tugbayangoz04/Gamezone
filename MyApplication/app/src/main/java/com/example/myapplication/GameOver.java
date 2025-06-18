@@ -1,49 +1,61 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOver extends AppCompatActivity {
 
-    TextView tvPoints;
-    TextView tvHighest;
-    SharedPreferences sharedPreferences;
-    ImageView ivNewHighest;
+    private TextView tvPoints, tvHighest;
+    private ImageView ivNewHighest;
+    private DBHelper dbHelper;
+    private String userEmail;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
         tvPoints = findViewById(R.id.tvPoints);
         tvHighest = findViewById(R.id.tvHighest);
         ivNewHighest = findViewById(R.id.ivNewHighest);
-        int points = getIntent().getExtras().getInt("points");
-        tvPoints.setText(""+points);
-        sharedPreferences = getSharedPreferences("my_pref",0);
-        int highest = sharedPreferences.getInt("highest",0);
-        if(points > highest){
-            ivNewHighest.setVisibility(View.VISIBLE);
-            highest = points;
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("highest",highest);
-            editor.commit();
+
+        dbHelper = new DBHelper(this);
+
+        Intent intent = getIntent();
+        int score = intent.getIntExtra("score", 0);
+        userEmail = intent.getStringExtra("usermail");
+
+        tvPoints.setText(String.valueOf(score));
+
+        if (userEmail != null) {
+            dbHelper.updateHighScore(userEmail, Constants.SAVE_THE_BUNNY_NAME, score);
+            int maxScore = dbHelper.getHighScore(userEmail, Constants.SAVE_THE_BUNNY_NAME);
+            tvHighest.setText(String.valueOf(maxScore));
+
+            if (score >= maxScore) {
+                ivNewHighest.setVisibility(View.VISIBLE);
+            }
+        } else {
+            tvHighest.setText("-");
         }
-        tvHighest.setText(""+highest);
     }
 
-    public void restart(View view){
-        Intent intent = new Intent(GameOver.this,SaveTheBunnyMainScreen.class);
+    public void restart(View view) {
+        Intent intent = new Intent(GameOver.this, SaveTheBunnyMainScreen.class);
+        intent.putExtra("usermail", userEmail);
         startActivity(intent);
         finish();
     }
-    public void exit(View view){
+
+    public void exit(View view) {
+        Intent intent = new Intent(GameOver.this, MainActivity.class);
+        intent.putExtra("usermail", userEmail);
+        startActivity(intent);
         finish();
     }
 }

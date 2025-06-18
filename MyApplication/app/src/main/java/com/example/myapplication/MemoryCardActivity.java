@@ -1,11 +1,9 @@
 package com.example.myapplication;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -88,7 +86,6 @@ public class MemoryCardActivity extends AppCompatActivity {
                 score += 10;
                 updateScore();
             } else {
-                // 🛠 Null kontrolü ile güncellendi
                 new Handler().postDelayed(() -> {
                     imageView.setImageResource(backImageResId);
                     if (firstCardView != null) {
@@ -111,10 +108,14 @@ public class MemoryCardActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(30000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 long seconds = millisUntilFinished / 1000;
                 timerText.setText("Süre: " + seconds + " sn");
+                if(score == 80){
+                    countDownTimer.cancel();
+                    handleGameEnd();
+                }
             }
 
             public void onFinish() {
@@ -125,7 +126,6 @@ public class MemoryCardActivity extends AppCompatActivity {
     }
 
     private void handleGameEnd() {
-        // ⬇️ Max score veritabanından al ve güncelle
         if (userEmail != null) {
             dbHelper.updateHighScore(userEmail, Constants.MEMORY_GAME_NAME, score);
             int maxScore = dbHelper.getHighScore(userEmail, Constants.MEMORY_GAME_NAME);

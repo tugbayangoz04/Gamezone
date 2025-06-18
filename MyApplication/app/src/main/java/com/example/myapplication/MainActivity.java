@@ -10,8 +10,9 @@ import androidx.cardview.widget.CardView;
 public class MainActivity extends AppCompatActivity {
 
     TextView welcomeText;
-    CardView memoryGameCard, moleGameCard, bunnyCard,flappyCard;
+    CardView memoryGameCard, moleGameCard, bunnyCard, flappyCard;
     Button btnLogout;
+    String usermail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("GAMEZONE");
         }
 
-        // View'ları bağla
         welcomeText = findViewById(R.id.welcomeText);
         memoryGameCard = findViewById(R.id.memoryGameCard);
         moleGameCard = findViewById(R.id.moleGameCard);
@@ -30,42 +30,31 @@ public class MainActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         flappyCard = findViewById(R.id.flappyGameCard);
 
-        // Kullanıcı adını al ve göster
-        String usermail = getIntent().getStringExtra("usermail");
-        if (usermail != null) {
-            welcomeText.setText("Welcome " + usermail + "!");
-        } else {
-            welcomeText.setText("Welcome!");
-        }
+        welcomeText.setText("Welcome!");
 
-        // CardView tıklamaları
+        usermail = getIntent().getStringExtra("usermail");
+
         memoryGameCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MemoryCardActivity.class);
-            intent.putExtra("usermail",usermail);
+            intent.putExtra("usermail", usermail);
             startActivity(intent);
         });
 
         moleGameCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MoleGameActivity.class);
-            intent.putExtra("usermail",usermail);
+            intent.putExtra("usermail", usermail);
             startActivity(intent);
         });
 
         bunnyCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SaveTheBunnyMainScreen.class);
-            intent.putExtra("usermail",usermail);
+            intent.putExtra("usermail", usermail);
             startActivity(intent);
         });
 
-        bunnyCard.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SaveTheBunnyMainScreen.class);
-            intent.putExtra("usermail",usermail);
-            startActivity(intent);
-        });
-
-        flappyCard.setOnClickListener(v-> {
+        flappyCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FBMainActivity.class);
-            intent.putExtra("usermail",usermail);
+            intent.putExtra("usermail", usermail);
             startActivity(intent);
         });
 

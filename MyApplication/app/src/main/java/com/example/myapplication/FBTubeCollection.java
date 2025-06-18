@@ -3,7 +3,7 @@ package com.example.myapplication;
 import java.util.Random;
 
 public class FBTubeCollection {
-    private int xTube; // this will hold the X coordinate
+    private int xTube;
     private int upTubeCollection_Y;
     private Random rand;
     private int colorTube;
