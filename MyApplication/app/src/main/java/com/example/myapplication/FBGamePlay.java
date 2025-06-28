@@ -7,8 +7,10 @@ import android.view.SurfaceView;
 
 public class FBGamePlay extends SurfaceView implements SurfaceHolder.Callback {
     FBMainThread mainThread;
+
     public FBGamePlay(Context context) {
         super(context);
+
         SurfaceHolder myHolder = getHolder();
         myHolder.addCallback(this);
         mainThread = new FBMainThread(myHolder);

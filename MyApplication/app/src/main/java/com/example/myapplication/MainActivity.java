@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         welcomeText.setText("Welcome!");
 
         usermail = getIntent().getStringExtra("usermail");
+        Log.d("usermail",usermail);
 
         memoryGameCard.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MemoryCardActivity.class);

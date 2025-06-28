@@ -13,12 +13,14 @@ public class FBMainActivity extends AppCompatActivity {
 
     Button mButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flappy_bird_home_screen);
         FBAppHolder.assign(this.getApplicationContext());
         mButton = findViewById(R.id.exitBtn);
+
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override

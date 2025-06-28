@@ -113,7 +113,7 @@ public class GameView extends View {
                 spikes.get(i).resetPosition();
                 if(life == 0){
                     Intent intent = new Intent(context,GameOver.class);
-                    intent.putExtra("points",points);
+                    intent.putExtra("score",points);
                     context.startActivity(intent);
                     ((Activity) context).finish();
                 }
